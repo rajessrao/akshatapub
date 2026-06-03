@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akshata Publications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Telugu:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #1a1008;
+      --paper: #faf6ef;
+      --aged: #f0e9d8;
+      --gold: #c9963a;
+      --gold-light: #e8c46a;
+      --rust: #9b3d2b;
+      --sage: #5a7358;
+      --cream: #fffdf8;
+      --muted: #7a6a55;
+      --border: #d4c4a0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250,246,239,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 7rem 4rem 5rem;
+      position: relative;
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 18vw, 18rem);
+      font-weight: 900;
+      font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(201,150,58,0.12);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-ornament {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,150,58,0.08) 0%, transparent 70%);
+      top: 10%;
+      right: -5%;
+      pointer-events: none;
+    }
+
+    .hero-ornament2 {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(155,61,43,0.06) 0%, transparent 70%);
+      bottom: 10%;
+      left: 5%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      padding: 0.3rem 1.2rem;
+      border: 1px solid var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-subtitle-tel {
+      font-family: 'Noto Telugu', sans-serif;
+      font-size: 1.6rem;
+      color: var(--muted);
+      margin: 0.6rem 0 1.8rem;
+      font-weight: 300;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #fff;
+      padding: 0.85rem 2.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--rust);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      padding: 0.85rem 2.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s;
+    }
+
+    .btn-outline:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .hero-stats {
+      margin-top: 4rem;
+      display: flex;
+      gap: 4rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 6rem 4rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+      margin: 1.5rem auto;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--aged);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(201,150,58,0.04) 20px,
+        rgba(201,150,58,0.04) 21px
+      );
+      pointer-events: none;
+    }
+
+    .about-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .about-text h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+    }
+
+    .about-text .about-tel {
+      font-family: 'Noto Telugu', sans-serif;
+      font-size: 1rem;
+      color: var(--rust);
+      font-style: normal;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px;
+      right: -8px; bottom: -8px;
+      border: 1px solid var(--gold);
+      z-index: -1;
+    }
+
+    .about-card-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-card p {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink);
+      line-height: 1.8;
+    }
+
+    .about-card-footer {
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .about-langs {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-badge {
+      padding: 0.35rem 1rem;
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--cream);
+    }
+
+    .lang-badge.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #fff;
+    }
+
+    /* ── BOOKS ── */
+    .books {
+      background: var(--cream);
+    }
+
+    .books-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .book-card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .book-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(26,16,8,0.12);
+    }
+
+    .book-cover {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-cover-1 { background-image: url('1Front.png'); background-size: cover; background-position: top; } 
+    .book-cover-2 { background-image: url('2Front.png'); background-size: cover; background-position: top; } 
+    .book-cover-3 { background-image: url('3Front.png'); background-size: cover; background-position: top; } 
+    .book-cover-4 { background-image: url('4Front.png'); background-size: cover; background-position: center; } 
+    .book-cover-5 { background-image: url('5Front.png'); background-size: cover; background-position: top; } 
+
+    .book-spine {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 18px;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .book-cover-text {
+      text-align: center;
+      padding: 1rem 2rem;
+      z-index: 1;
+    }
+
+    .book-cover-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .book-cover-title.telugu {
+      font-family: 'Noto Telugu', sans-serif;
+      font-size: 1.3rem;
+    }
+
+    .book-cover-pub {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .book-cover-ornament {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      bottom: -20px;
+      right: -20px;
+    }
+
+    .book-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+    }
+
+    .book-info {
+      padding: 1.5rem;
+    }
+
+    .book-genre {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .book-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .book-title.telugu {
+      font-family: 'Noto Telugu', sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .book-lang {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      font-style: italic;
+    }
+
+    .book-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .book-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .book-author {
+      font-size: 0.85rem;
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    .book-buy-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--gold);
+      transition: all 0.2s;
+    }
+
+    .book-buy-link:hover {
+      background: var(--gold);
+      color: #fff;
+    }
+
+    /* ── GENRES ── */
+    .genres {
+      background: var(--ink);
+      color: var(--paper);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .genres::before {
+      content: 'AKSHATA';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: 20vw;
+      font-weight: 900;
+      font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(201,150,58,0.08);
+      bottom: -5%;
+      right: -2%;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .genres .section-title { color: var(--paper); }
+    .genres .section-tag { color: var(--gold-light); }
+    .genres .section-subtitle { color: rgba(250,246,239,0.6); }
+
+    .genres-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .genre-item {
+      border: 1px solid rgba(201,150,58,0.3);
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .genre-item:hover {
+      border-color: var(--gold);
+      background: rgba(201,150,58,0.05);
+    }
+
+    .genre-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .genre-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .genre-count {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--gold-light);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .genre-desc {
+      font-size: 0.9rem;
+      color: rgba(250,246,239,0.55);
+      line-height: 1.6;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--aged);
+      position: relative;
+    }
+
+    .contact-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-info p {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-detail-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: var(--cream);
+    }
+
+    .contact-detail-text strong {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-detail-text span {
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .contact-form {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-textarea { height: 110px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 3.5rem 4rem 2rem;
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-brand h3 span { color: var(--gold); }
+
+    .footer-brand .tel-name {
+      font-family: 'Noto Telugu', sans-serif;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      color: rgba(250,246,239,0.5);
+      line-height: 1.8;
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-col ul li a {
+      color: rgba(250,246,239,0.5);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--gold-light); }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: rgba(250,246,239,0.35);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: rgba(250,246,239,0.5);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .marquee-strip {
+      background: var(--gold);
+      padding: 0.7rem 0;
+      overflow: hidden;
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .marquee-item::after {
+      content: '◆';
+      font-size: 0.5rem;
+      opacity: 0.7;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 4rem; }
+      .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .genres-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 2rem; }
+    }
+
+    @media (max-width: 600px) {
+      .genres-grid { grid-template-columns: 1fr; }
+      .books-grid { grid-template-columns: 1fr; }
+      footer { padding: 3rem 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Akshata <span>Publications</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#books">Our Books</a></li>
+      <li><a href="#genres">Genres</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-text">Akshata</div>
+    <div class="hero-ornament"></div>
+    <div class="hero-ornament2"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Est. Hyderabad, Telangana, India</span>
+      <h1 class="hero-title">Akshata<br><em>Publications</em></h1>
+      <p class="hero-subtitle-tel">అక్షత పబ్లికేషన్స్</p>
+      <p class="hero-desc">Stories that breathe. Words that endure. Bringing Telugu literature and beyond to readers across the world.</p>
+      <div class="hero-cta-group">
+        <a href="#books" class="btn-primary">Explore Our Books</a>
+        <a href="#contact" class="btn-outline">Work With Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Titles Published</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">2</span>
+          <span class="stat-label">Languages</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Genres</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">∞</span>
+          <span class="stat-label">Stories to Tell</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span class="marquee-item">Telugu Novels</span>
+      <span class="marquee-item">Telugu Anthology</span>
+      <span class="marquee-item">English Sci-Fi</span>
+      <span class="marquee-item">Available on Amazon</span>
+      <span class="marquee-item">Akshata Publications</span>
+      <span class="marquee-item">అక్షత పబ్లికేషన్స్</span>
+      <span class="marquee-item">Telugu Novels</span>
+      <span class="marquee-item">Telugu Anthology</span>
+      <span class="marquee-item">English Sci-Fi</span>
+      <span class="marquee-item">Available on Amazon</span>
+      <span class="marquee-item">Akshata Publications</span>
+      <span class="marquee-item">అక్షత పబ్లికేషన్స్</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>A Publishing House Born from<br><em>Passion for Words</em></h2>
+        <p>Akshata Publications is an independent publishing firm dedicated to nurturing literary voices across Telugu and English. We believe every story deserves to be told, and every reader deserves to find the book that speaks to them.</p>
+        <p>From the rich tradition of Telugu literature - novels, anthologies, poetry - to the boundless imagination of English science fiction, our catalogue reflects a deep commitment to quality storytelling.</p>
+        <p class="about-tel">మన సాహిత్యాన్ని, మన భాషని ప్రపంచానికి పరిచయం చేద్దాం.</p>
+        <div class="about-langs">
+          <span class="lang-badge active">Telugu</span>
+          <span class="lang-badge active">English</span>
+          <span class="lang-badge">More Languages - Soon</span>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-card">
+          <div class="about-card-quote">"</div>
+          <p>Literature is the most powerful bridge between hearts and cultures. At Akshata, we build those bridges - one book at a time.</p>
+          <div class="about-card-footer">- Akshata Publications Team</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKS -->
+  <section class="books" id="books">
+    <div class="section-header">
+      <span class="section-tag">Our Catalogue</span>
+      <h2 class="section-title">Five Titles. <em>Countless Journeys.</em></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">Each book a world unto itself - available on Amazon and leading platforms.</p>
+    </div>
+
+    <div class="books-grid">
+
+      <!-- Book 1: అనఘ - Telugu Anthology -->
+      <div class="book-card">
+        <div class="book-cover book-cover-1">
+          <div class="book-spine"></div>
+          <div class="book-cover-text">
+            <!-- <div class="book-cover-title telugu">అనఘ</div> -->
+            <!-- <div class="book-cover-pub">Akshata Publications</div> -->
+          </div>
+          <div class="book-cover-ornament"></div>
+        </div>
+        <div class="book-badge">Anthology</div>
+        <div class="book-info">
+          <div class="book-genre">Telugu · Anthology · 9 Authors</div>
+          <div class="book-title telugu">అనఘ</div>
+          <div class="book-lang">Anagha - Telugu Story Collection</div>
+          <p class="book-desc" style="font-family:'Noto Telugu',sans-serif; font-size:0.85rem; line-height:1.8;">తొమ్మిది మంది రచయితల కలాల కలయికతో రూపొందిన ఈ కథా సంకలనం - భిన్న ధ్రువాల ఆలోచనలు, తరాల మధ్య మారుతున్న జీవన శైలులు, ఆత్మగౌరవంతో విరిసే జీవితాలను సజీవంగా చిత్రిస్తుంది.</p>
+          <div class="book-footer">
+            <span class="book-author">9 Authors</span>
+            <a href="https://www.amazon.in/dp/B0GY3J8W6L" target="_blank" class="book-buy-link">Buy on Amazon</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 2: Antaka's Last Echo - English Sci-Fi -->
+      <div class="book-card">
+        <div class="book-cover book-cover-2">
+          <div class="book-spine"></div>
+          <div class="book-cover-text">
+            <!-- <div class="book-cover-title">Antaka's Last Echo</div> -->
+            <!-- <div class="book-cover-pub">Akshata Publications</div> -->
+          </div>
+          <div class="book-cover-ornament"></div>
+        </div>
+        <div class="book-badge">Sci-Fi</div>
+        <div class="book-info">
+          <div class="book-genre">English · Novel · Science Fiction</div>
+          <div class="book-title">Antaka's Last Echo</div>
+          <div class="book-lang">Rajesh Kumar Botchu - English Sci-Fi Novel</div>
+          <p class="book-desc">A planet divided between Aurelia's patient, nature-rooted technology and Iron-Reach's relentless machine power. When an asteroid strikes and robot armies rebel, both civilisations fall silent - leaving only an Echo that learns to roar.</p>
+          <div class="book-footer">
+            <span class="book-author">Rajesh Kumar Botchu</span>
+            <a href="https://www.amazon.in/dp/B0GY3N2FVB" target="_blank" class="book-buy-link">Buy on Amazon</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 3: ఫలం లేని కలం - Telugu Novel -->
+      <div class="book-card">
+        <div class="book-cover book-cover-3">
+          <div class="book-spine"></div>
+          <div class="book-cover-text">
+            <!-- <div class="book-cover-title telugu">ఫలం లేని కలం</div> -->
+            <!-- <div class="book-cover-pub">Akshata Publications</div> -->
+          </div>
+          <div class="book-cover-ornament"></div>
+        </div>
+        <div class="book-badge">Novel</div>
+        <div class="book-info">
+          <div class="book-genre">Telugu · Novel</div>
+          <div class="book-title telugu">ఫలం లేని కలం</div>
+          <div class="book-lang">Phalam Leni Kalam - Aravind Vedant</div>
+          <p class="book-desc" style="font-family:'Noto Telugu',sans-serif; font-size:0.85rem; line-height:1.8;">జీవితం అనే యుద్ధంలో ఫలితం ఉన్న లేకపోయినా కర్మ చేయడమే మానవ జీవితానికి మోక్షం - భగవద్గీత స్ఫూర్తితో నేడు అర్జునుడిగా జీవించే ఒక మనిషి యాత్ర.</p>
+          <div class="book-footer">
+            <span class="book-author">అరవింద్ వేదాంత్</span>
+            <a href="https://www.amazon.in/dp/B0GZ3R11NX" target="_blank" class="book-buy-link">Buy on Amazon</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 4: దేవుడు చేసిన పొరపాటు - Telugu Novel -->
+      <div class="book-card">
+        <div class="book-cover book-cover-4">
+          <div class="book-spine"></div>
+          <div class="book-cover-text">
+            <!-- <div class="book-cover-title telugu">దేవుడు చేసిన పొరపాటు</div> -->
+            <!-- <div class="book-cover-pub">Akshata Publications</div> -->
+          </div>
+          <div class="book-cover-ornament"></div>
+        </div>
+        <div class="book-badge">Novel</div>
+        <div class="book-info">
+          <div class="book-genre">Telugu · Novel · Social Drama</div>
+          <div class="book-title telugu">దేవుడు చేసిన పొరపాటు</div>
+          <div class="book-lang">Devudu Chesina Porapaatu - Prabhakar Machha</div>
+          <p class="book-desc" style="font-family:'Noto Telugu',sans-serif; font-size:0.85rem; line-height:1.8;">సమాజం జెండర్ ఈక్వాలిటీని అర్ధం చేసుకున్న తీరులో దాగున్న లోపాన్ని ఎత్తిచూపి, మరింత న్యాయమైన దృష్టిని అందించే సాహసోపేత కథ.</p>
+          <div class="book-footer">
+            <span class="book-author">ప్రభాకర్ మచ్చ</span>
+            <a href="https://www.amazon.in/dp/B0H1Q43S9W" target="_blank" class="book-buy-link">Buy on Amazon</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 5: నిశీథి నాదం - Telugu Novel -->
+      <div class="book-card">
+        <div class="book-cover book-cover-5">
+          <div class="book-spine"></div>
+          <div class="book-cover-text">
+            <!-- <div class="book-cover-title telugu">నిశీథి నాదం</div> -->
+            <!-- <div class="book-cover-pub">Akshata Publications</div> -->
+          </div>
+          <div class="book-cover-ornament"></div>
+        </div>
+        <div class="book-badge">Novel</div>
+        <div class="book-info">
+          <div class="book-genre">Telugu · Novel · Mystery Thriller</div>
+          <div class="book-title telugu">నిశీథి నాదం</div>
+          <div class="book-lang">Nishithi Nadam - Mamilla Koteswara Rao</div>
+          <p class="book-desc" style="font-family:'Noto Telugu',sans-serif; font-size:0.85rem; line-height:1.8;">ఒక విచిత్ర వార్త, ఒక మహిళా పరిశోధకురాలు, వనసీమ అడవి, తరతరాల మాంత్రికుల రహస్యం - అడుగడుగునా ఉత్కంఠ కలిగిస్తూ, ప్రపంచ వృక్షశాస్త్ర చరిత్రను మలుపు తిప్పగలిగిన నవల.</p>
+          <div class="book-footer">
+            <span class="book-author">మామిళ్ల కోటేశ్వరరావు</span>
+            <a href="https://www.amazon.in/dp/B0H21S1CLV" target="_blank" class="book-buy-link">Buy on Amazon</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GENRES -->
+  <section class="genres" id="genres">
+    <div class="section-header">
+      <span class="section-tag">What We Publish</span>
+      <h2 class="section-title">Our Literary <em>Domains</em></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">Rooted in Telugu, reaching toward the world.</p>
+    </div>
+    <div class="genres-grid">
+      <div class="genre-item">
+        <span class="genre-icon">📖</span>
+        <div class="genre-name">Telugu Novels</div>
+        <div class="genre-count">3 Titles</div>
+        <p class="genre-desc">Long-form Telugu fiction exploring the full breadth of human experience - from rural life to urban drama, political fire to quiet introspection.</p>
+      </div>
+      <div class="genre-item">
+        <span class="genre-icon">🌸</span>
+        <div class="genre-name">Telugu Anthology</div>
+        <div class="genre-count">1 Title</div>
+        <p class="genre-desc">Multi-author collections that celebrate the diversity and vibrancy of Telugu literary voices in short story and poetic form.</p>
+      </div>
+      <div class="genre-item">
+        <span class="genre-icon">🚀</span>
+        <div class="genre-name">English Novels</div>
+        <div class="genre-count">1 Title</div>
+        <p class="genre-desc">Speculative fiction in English that pushes the boundaries of imagination - exploring futures, first contacts, and the philosophy of what lies beyond.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-header">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Let's Build <em>Something Together</em></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">For authors, readers, press, and collaborations.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>We'd Love to Hear from You</h3>
+        <p>Whether you're an author with a manuscript, a reader with a question, or a partner with a vision - our door is always open.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉</div>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            <span>akshata.publications@gmail.com</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div class="contact-detail-text">
+            <strong>Location</strong>
+            <span>Hyderabad, Telangana, India</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🛒</div>
+          <div class="contact-detail-text">
+            <strong>Available On</strong>
+            <span>Amazon India & other platforms</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" placeholder="Full name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input type="text" class="form-input" placeholder="Manuscript submission, press inquiry..."/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%; text-align:center;">Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Akshata <span>Publications</span></h3>
+        <p class="tel-name">అక్షత పబ్లికేషన్స్</p>
+        <p>An independent publishing house nurturing Telugu and English literature. Five titles published. Many more stories waiting to be told.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#books">Our Books</a></li>
+          <li><a href="#genres">Genres</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Books On</h4>
+        <ul>
+          <li><a href="https://www.amazon.in/storefront?me=A32WUPL5LJLMY7" target="_blank">Amazon India</a></li>
+          <li><a href="https://books.ataka.in/" target="_blank">Ataka Books</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Akshata Publications. All rights reserved.</span>
+      <div class="social-links">
+        <a href="https://www.instagram.com/akshata_publications/" target="_blank" class="social-link">ig</a>
+        <a href="https://x.com/AkshataPub" target="_blank" class="social-link">tw</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
